@@ -269,7 +269,7 @@ class TemplateProcessor
             $subject = utf8_encode($subject);
         }
 
-        return $subject;
+        return (!is_null($subject)) ? $subject : '';
     }
 
     /**
