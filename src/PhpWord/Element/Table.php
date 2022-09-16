@@ -11,7 +11,7 @@
  * contributors, visit https://github.com/PHPOffice/PHPWord/contributors.
  *
  * @see         https://github.com/PHPOffice/PHPWord
- * @copyright   2010-2018 PHPWord contributors
+ *
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
 
@@ -20,30 +20,30 @@ namespace PhpOffice\PhpWord\Element;
 use PhpOffice\PhpWord\Style\Table as TableStyle;
 
 /**
- * Table element
+ * Table element.
  */
 class Table extends AbstractElement
 {
     /**
-     * Table style
+     * Table style.
      *
      * @var \PhpOffice\PhpWord\Style\Table
      */
     private $style;
 
     /**
-     * Table rows
+     * Table rows.
      *
      * @var \PhpOffice\PhpWord\Element\Row[]
      */
-    private $rows = array();
+    private $rows = [];
 
     /**
-     * Table width
+     * Table width.
      *
      * @var int
      */
-    private $width = null;
+    private $width;
 
     /**
      * @var bool
@@ -51,7 +51,7 @@ class Table extends AbstractElement
     private $hasDifferentCellWidths = false;
 
     /**
-     * Create a new table
+     * Create a new table.
      *
      * @param mixed $style
      */
@@ -61,10 +61,11 @@ class Table extends AbstractElement
     }
 
     /**
-     * Add a row
+     * Add a row.
      *
      * @param int $height
      * @param mixed $style
+     *
      * @return \PhpOffice\PhpWord\Element\Row
      */
     public function addRow($height = null, $style = null)
@@ -77,10 +78,11 @@ class Table extends AbstractElement
     }
 
     /**
-     * Add a cell
+     * Add a cell.
      *
      * @param int $width
      * @param mixed $style
+     *
      * @return \PhpOffice\PhpWord\Element\Cell
      */
     public function addCell($width = null, $style = null)
@@ -93,7 +95,7 @@ class Table extends AbstractElement
     }
 
     /**
-     * Get all rows
+     * Get all rows.
      *
      * @return \PhpOffice\PhpWord\Element\Row[]
      */
@@ -103,7 +105,7 @@ class Table extends AbstractElement
     }
 
     /**
-     * Get table style
+     * Get table style.
      *
      * @return \PhpOffice\PhpWord\Style\Table
      */
@@ -113,7 +115,7 @@ class Table extends AbstractElement
     }
 
     /**
-     * Get table width
+     * Get table width.
      *
      * @return int
      */
@@ -127,13 +129,13 @@ class Table extends AbstractElement
      *
      * @param int $width
      */
-    public function setWidth($width)
+    public function setWidth($width): void
     {
         $this->width = $width;
     }
 
     /**
-     * Get column count
+     * Get column count.
      *
      * @return int
      */
@@ -142,7 +144,7 @@ class Table extends AbstractElement
         $columnCount = 0;
 
         $rowCount = count($this->rows);
-        for ($i = 0; $i < $rowCount; $i++) {
+        for ($i = 0; $i < $rowCount; ++$i) {
             /** @var \PhpOffice\PhpWord\Element\Row $row Type hint */
             $row = $this->rows[$i];
             $cellCount = count($row->getCells());
@@ -155,20 +157,20 @@ class Table extends AbstractElement
     }
 
     /**
-     * The first declared cell width for each column
+     * The first declared cell width for each column.
      *
      * @return int[]
      */
     public function findFirstDefinedCellWidths()
     {
-        $cellWidths = array();
+        $cellWidths = [];
 
         foreach ($this->rows as $row) {
             $cells = $row->getCells();
             if (count($cells) <= count($cellWidths)) {
                 continue;
             }
-            $cellWidths = array();
+            $cellWidths = [];
             foreach ($cells as $cell) {
                 $cellWidths[] = $cell->getWidth();
             }
